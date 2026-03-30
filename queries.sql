@@ -97,8 +97,8 @@ ORDER BY
 SELECT
     CASE
         WHEN c.age >= 16 AND c.age <= 25 THEN '16-25'
-        WHEN c.age >= 26 AND c.age < 40 THEN '26-40'
-        WHEN c.age >= 40 THEN '40+'
+        WHEN c.age >= 26 AND c.age <= 40 THEN '26-40'
+        WHEN c.age > 40 THEN '40+'
         ELSE '<16'
     END AS age_category,
     COUNT(c.customer_id) AS age_count
