@@ -119,7 +119,7 @@ ORDER BY age_category;
 
 SELECT
     TO_CHAR(s.sale_date, 'YYYY-MM') AS selling_month,
-    COUNT(c.customer_id) AS total_customers,
+    COUNT(DISTINCT s.customer_id) AS total_customers,
     FLOOR(SUM(COALESCE(s.quantity, 0) * COALESCE(p.price, 0))) AS income
 FROM sales AS s
 LEFT JOIN customers AS c
@@ -133,7 +133,7 @@ ORDER BY
 -- Автор: Константин Игнатенко
 -- Email: grundigk@gmail.com
 -- Описание: Отчет помесячный, количество покупателей с общей выручкой
--- Файл результат: 
+-- Файл результат: customers_by_month.csv -
 -- Проект: Продажи 
 -- Задание: 6
 -- Ссылка: https://ru.hexlet.io/projects/92/members/50321?step=6
