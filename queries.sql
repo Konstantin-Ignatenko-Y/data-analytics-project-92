@@ -12,7 +12,7 @@ WHERE first_name IS NOT NULL;
 SELECT
     e.first_name || ' ' || e.last_name AS seller,
     COUNT(s.sales_id) AS operations,
-    SUM(FLOOR(COALESCE(s.quantity, 0) * COALESCE(p.price, 0))) AS income
+    FLOOR(SUM(COALESCE(s.quantity, 0) * COALESCE(p.price, 0))) AS income
 FROM employees AS e
 LEFT JOIN sales AS s
     ON e.employee_id = s.sales_person_id
