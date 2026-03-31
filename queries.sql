@@ -4,8 +4,8 @@ WHERE first_name IS NOT NULL;
 -- Автор: Константин Игнатенко
 -- Email: grundigk@gmail.com
 -- Описание: Отчет количество покупателей
--- Файл результат: customers_count.csv +
--- Проект: Продажи 
+-- Файл результат: customers_count.csv
+-- Проект: Продажи
 -- Задание: 4
 -- Ссылка: https://ru.hexlet.io/projects/92/members/50321?step=4
 
@@ -25,7 +25,7 @@ LIMIT 10;
 -- Email: grundigk@gmail.com
 -- Описание: Отчет с продавцами у которых наибольшая выручка
 -- Файл результат: top_10_total_income.csv
--- Проект: Продажи 
+-- Проект: Продажи
 -- Задание: 5
 -- Ссылка: https://ru.hexlet.io/projects/92/members/50321?step=5
 
@@ -62,10 +62,10 @@ WHERE
 ORDER BY sa.average_income_employee ASC;
 -- Автор: Константин Игнатенко
 -- Email: grundigk@gmail.com
--- Описание: Отчет с продавцами чья средняя выручка 
+-- Описание: Отчет с продавцами чья средняя выручка
 --     за сделку меньше средней выручки за сделку по всем продавцам
--- Файл результат: lowest_average_income.csv +
--- Проект: Продажи 
+-- Файл результат: lowest_average_income.csv
+-- Проект: Продажи
 -- Задание: 5
 -- Ссылка: https://ru.hexlet.io/projects/92/members/50321?step=5
 
@@ -94,7 +94,7 @@ ORDER BY
 -- Email: grundigk@gmail.com
 -- Описание: Отчет выручки продавцов по дням недели
 -- Файл результат: day_of_the_week_income.csv
--- Проект: Продажи 
+-- Проект: Продажи
 -- Задание: 5
 -- Ссылка: https://ru.hexlet.io/projects/92/members/50321?step=5
 
@@ -113,7 +113,7 @@ ORDER BY age_category;
 -- Email: grundigk@gmail.com
 -- Описание: Отчет количество покупателей в разных возрастных группах
 -- Проект: Продажи
--- Файл результат: age_groups.csv +
+-- Файл результат: age_groups.csv
 -- Задание: 6
 -- Ссылка: https://ru.hexlet.io/projects/92/members/50321?step=6
 
@@ -133,8 +133,8 @@ ORDER BY
 -- Автор: Константин Игнатенко
 -- Email: grundigk@gmail.com
 -- Описание: Отчет помесячный, количество покупателей с общей выручкой
--- Файл результат: customers_by_month.csv -
--- Проект: Продажи 
+-- Файл результат: customers_by_month.csv
+-- Проект: Продажи
 -- Задание: 6
 -- Ссылка: https://ru.hexlet.io/projects/92/members/50321?step=6
 
@@ -144,7 +144,8 @@ WITH min_date AS (
         c.customer_id,
         CONCAT(c.first_name, ' ', c.last_name) AS customer,
         CONCAT(e.first_name, ' ', e.last_name) AS seller,
-        MIN(s.sale_date) AS sale_date
+        MIN(s.sale_date) AS sale_date,
+        ROW_NUMBER() OVER (PARTITION BY c.customer_id) AS rn
     FROM customers AS c
     LEFT JOIN sales AS s
         ON c.customer_id = s.customer_id
@@ -167,12 +168,13 @@ SELECT
     sale_date,
     seller
 FROM min_date
+WHERE rn = 1
 ORDER BY customer_id;
 -- Автор: Константин Игнатенко
 -- Email: grundigk@gmail.com
 -- Описание: Отчет список покупателей совершивших первую покупку 
 -- с нулевой ценой(такая акция) когда и у какого продавца
 -- Проект: Продажи
--- Файл результат: special_offer.csv
+-- Файл результат: special_offer.csv 
 -- Задание: 6
 -- Ссылка: https://ru.hexlet.io/projects/92/members/50321?step=6
