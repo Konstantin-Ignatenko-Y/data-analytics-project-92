@@ -1,6 +1,6 @@
 SELECT COUNT(customer_id) AS customers_count
 FROM customers
-WHERE first_name IS NOT NULL; 
+WHERE first_name IS NOT NULL;
 -- Автор: Константин Игнатенко
 -- Email: grundigk@gmail.com
 -- Описание: Отчет количество покупателей
